@@ -42,6 +42,87 @@ const sdkToAndroidMapping = (function() {
     return map;
 })();
 
+const devicePresets = {
+    "snapdragon_8_gen_3": {
+        HARDWARE: "qcom",
+        HARDWARE_CHIPNAME: "SM8650",
+        CHIPNAME: "SM8650",
+        SOC_MANUFACTURER: "Qualcomm",
+        SOC_MODEL: "SM8650",
+        BOARD_PLATFORM: "pineapple",
+        PRODUCT_BOARD: "pineapple",
+        ARCH: "arm64",
+        REVISION: "0",
+        CPU_CORES: "8"
+    },
+    "snapdragon_8_gen_2": {
+        HARDWARE: "qcom",
+        HARDWARE_CHIPNAME: "SM8550",
+        CHIPNAME: "SM8550",
+        SOC_MANUFACTURER: "Qualcomm",
+        SOC_MODEL: "SM8550",
+        BOARD_PLATFORM: "kalama",
+        PRODUCT_BOARD: "kalama",
+        ARCH: "arm64",
+        REVISION: "0",
+        CPU_CORES: "8"
+    },
+    "snapdragon_8_gen_1": {
+        HARDWARE: "qcom",
+        HARDWARE_CHIPNAME: "SM8450",
+        CHIPNAME: "SM8450",
+        SOC_MANUFACTURER: "Qualcomm",
+        SOC_MODEL: "SM8450",
+        BOARD_PLATFORM: "taro",
+        PRODUCT_BOARD: "taro",
+        ARCH: "arm64",
+        REVISION: "0",
+        CPU_CORES: "8"
+    },
+    "dimensity_9300": {
+        HARDWARE: "mt6985",
+        HARDWARE_CHIPNAME: "MT6985",
+        CHIPNAME: "MT6985",
+        SOC_MANUFACTURER: "MediaTek",
+        SOC_MODEL: "MT6985",
+        BOARD_PLATFORM: "mt6985",
+        PRODUCT_BOARD: "mt6985",
+        MEDIATEK_PLATFORM: "MT6985",
+        ARCH: "arm64",
+        REVISION: "0",
+        CPU_CORES: "8"
+    },
+    "exynos_2400": {
+        HARDWARE: "exynos",
+        HARDWARE_CHIPNAME: "s5e9945",
+        CHIPNAME: "s5e9945",
+        SOC_MANUFACTURER: "Samsung",
+        SOC_MODEL: "s5e9945",
+        BOARD_PLATFORM: "s5e9945",
+        PRODUCT_BOARD: "s5e9945",
+        ARCH: "arm64",
+        REVISION: "0",
+        CPU_CORES: "8"
+    },
+    "tensor_g4": {
+        HARDWARE: "zumapro",
+        HARDWARE_CHIPNAME: "zumapro",
+        CHIPNAME: "zumapro",
+        SOC_MANUFACTURER: "Google",
+        SOC_MODEL: "Tensor G4",
+        BOARD_PLATFORM: "zumapro",
+        PRODUCT_BOARD: "zumapro",
+        ARCH: "arm64",
+        REVISION: "0",
+        CPU_CORES: "8"
+    }
+};
+
+function toggleSection(headerElement) {
+    const section = headerElement.closest('.collapsible-section');
+    section.classList.toggle('expanded');
+}
+
 const templates = {
     deviceCard: (data) => {
         const template = document.getElementById('device-card-template');
@@ -2282,7 +2363,7 @@ function openDeviceModal(deviceKey = null) {
     const title = document.getElementById('device-modal-title');
     const form = document.getElementById('device-form');
     
-    form.querySelectorAll('input').forEach(field => {
+    form.querySelectorAll('input, select').forEach(field => {
         field.classList.remove('error');
         const existingError = field.nextElementSibling;
         if (existingError && existingError.classList.contains('error-message')) {
@@ -2290,17 +2371,85 @@ function openDeviceModal(deviceKey = null) {
         }
     });
     
+    // Setup preset selector
+    const presetSelect = document.getElementById('device-preset');
+    if (presetSelect) {
+        presetSelect.value = '';
+        presetSelect.onchange = function() {
+            if (this.value) {
+                const preset = devicePresets[this.value];
+                if (preset) {
+                    // Fill in preset values
+                    Object.keys(preset).forEach(key => {
+                        const fieldId = 'device-' + key.toLowerCase().replace(/_/g, '-');
+                        const field = document.getElementById(fieldId);
+                        if (field && preset[key]) {
+                            field.value = preset[key];
+                        }
+                    });
+                    appendToOutput(`Applied preset: ${this.value}`, 'success');
+                }
+            }
+        };
+    }
+    
     if (deviceKey) {
         title.textContent = 'Edit Device Profile';
         editingDevice = deviceKey;
         const deviceData = currentConfig[deviceKey];
+        
+        // Basic fields
         document.getElementById('device-name').value = deviceData.DEVICE || '';
         document.getElementById('device-brand').value = deviceData.BRAND || '';
         document.getElementById('device-model').value = deviceData.MODEL || '';
         document.getElementById('device-manufacturer').value = deviceData.MANUFACTURER || '';
+        document.getElementById('device-device').value = deviceData.DEVICE || '';
+        document.getElementById('device-product').value = deviceData.PRODUCT || '';
         document.getElementById('device-fingerprint').value = deviceData.FINGERPRINT || '';
+        
+        // Hardware properties
+        document.getElementById('device-hardware').value = deviceData.HARDWARE || '';
+        document.getElementById('device-hardware-chipname').value = deviceData.HARDWARE_CHIPNAME || '';
+        document.getElementById('device-chipname').value = deviceData.CHIPNAME || '';
+        document.getElementById('device-arch').value = deviceData.ARCH || '';
+        document.getElementById('device-revision').value = deviceData.REVISION || '';
+        
+        // SoC properties
+        document.getElementById('device-soc-manufacturer').value = deviceData.SOC_MANUFACTURER || '';
+        document.getElementById('device-soc-model').value = deviceData.SOC_MODEL || '';
+        document.getElementById('device-board-platform').value = deviceData.BOARD_PLATFORM || '';
+        document.getElementById('device-product-board').value = deviceData.PRODUCT_BOARD || '';
+        document.getElementById('device-mediatek-platform').value = deviceData.MEDIATEK_PLATFORM || '';
+        
+        // Build properties
+        document.getElementById('device-build-changelist').value = deviceData.BUILD_CHANGELIST || '';
+        document.getElementById('device-build-flavor').value = deviceData.BUILD_FLAVOR || '';
         document.getElementById('device-android-version').value = deviceData.ANDROID_VERSION || '';
         document.getElementById('device-sdk-int').value = deviceData.SDK_INT || '';
+        
+        // CPU configuration
+        document.getElementById('device-cpu-cores').value = deviceData.CPU_CORES || '';
+        
+        // Extended fingerprints
+        document.getElementById('device-vendor-fingerprint').value = deviceData.VENDOR_FINGERPRINT || '';
+        document.getElementById('device-system-fingerprint').value = deviceData.SYSTEM_FINGERPRINT || '';
+        document.getElementById('device-system-ext-fingerprint').value = deviceData.SYSTEM_EXT_FINGERPRINT || '';
+        document.getElementById('device-odm-fingerprint').value = deviceData.ODM_FINGERPRINT || '';
+        document.getElementById('device-bootimage-fingerprint').value = deviceData.BOOTIMAGE_FINGERPRINT || '';
+        document.getElementById('device-product-fingerprint').value = deviceData.PRODUCT_FINGERPRINT || '';
+        
+        // Vendor/ODM properties
+        document.getElementById('device-vendor-brand').value = deviceData.VENDOR_BRAND || '';
+        document.getElementById('device-vendor-device').value = deviceData.VENDOR_DEVICE || '';
+        document.getElementById('device-vendor-manufacturer').value = deviceData.VENDOR_MANUFACTURER || '';
+        document.getElementById('device-vendor-model').value = deviceData.VENDOR_MODEL || '';
+        document.getElementById('device-vendor-name').value = deviceData.VENDOR_NAME || '';
+        document.getElementById('device-odm-brand').value = deviceData.ODM_BRAND || '';
+        document.getElementById('device-odm-device').value = deviceData.ODM_DEVICE || '';
+        document.getElementById('device-odm-manufacturer').value = deviceData.ODM_MANUFACTURER || '';
+        document.getElementById('device-odm-model').value = deviceData.ODM_MODEL || '';
+        document.getElementById('device-odm-name').value = deviceData.ODM_NAME || '';
+        
         setupAndroidSdkLink();
     } else {
         title.textContent = 'Add New Device Profile';
@@ -2797,17 +2946,55 @@ async function saveDevice(e) {
     const packageKey = deviceKey.replace('_DEVICE', '');
     const brand = document.getElementById('device-brand').value.trim() || 'Unknown';
     const model = document.getElementById('device-model').value.trim() || 'Unknown';
+    const device = document.getElementById('device-device').value.trim();
+    const product = document.getElementById('device-product').value.trim();
     
     const androidVersion = document.getElementById('device-android-version').value.trim();
     const sdkInt = document.getElementById('device-sdk-int').value.trim();
     
+    // Helper function to add optional field
+    const addOptionalField = (fieldId, key) => {
+        const value = document.getElementById(fieldId)?.value.trim();
+        if (value) return { [key]: value };
+        return {};
+    };
+    
     const deviceData = {
         BRAND: brand,
-        DEVICE: deviceName,
+        DEVICE: device || deviceName,
         MANUFACTURER: document.getElementById('device-manufacturer').value.trim() || 'Unknown',
         MODEL: model,
         FINGERPRINT: document.getElementById('device-fingerprint').value.trim() || `${brand}/${model}/${model}:14/UP1A.231005.007/20230101:user/release-keys`,
-        PRODUCT: model
+        PRODUCT: product || model,
+        ...addOptionalField('device-hardware', 'HARDWARE'),
+        ...addOptionalField('device-hardware-chipname', 'HARDWARE_CHIPNAME'),
+        ...addOptionalField('device-chipname', 'CHIPNAME'),
+        ...addOptionalField('device-arch', 'ARCH'),
+        ...addOptionalField('device-revision', 'REVISION'),
+        ...addOptionalField('device-soc-manufacturer', 'SOC_MANUFACTURER'),
+        ...addOptionalField('device-soc-model', 'SOC_MODEL'),
+        ...addOptionalField('device-board-platform', 'BOARD_PLATFORM'),
+        ...addOptionalField('device-product-board', 'PRODUCT_BOARD'),
+        ...addOptionalField('device-mediatek-platform', 'MEDIATEK_PLATFORM'),
+        ...addOptionalField('device-build-changelist', 'BUILD_CHANGELIST'),
+        ...addOptionalField('device-build-flavor', 'BUILD_FLAVOR'),
+        ...addOptionalField('device-cpu-cores', 'CPU_CORES'),
+        ...addOptionalField('device-vendor-fingerprint', 'VENDOR_FINGERPRINT'),
+        ...addOptionalField('device-system-fingerprint', 'SYSTEM_FINGERPRINT'),
+        ...addOptionalField('device-system-ext-fingerprint', 'SYSTEM_EXT_FINGERPRINT'),
+        ...addOptionalField('device-odm-fingerprint', 'ODM_FINGERPRINT'),
+        ...addOptionalField('device-bootimage-fingerprint', 'BOOTIMAGE_FINGERPRINT'),
+        ...addOptionalField('device-product-fingerprint', 'PRODUCT_FINGERPRINT'),
+        ...addOptionalField('device-vendor-brand', 'VENDOR_BRAND'),
+        ...addOptionalField('device-vendor-device', 'VENDOR_DEVICE'),
+        ...addOptionalField('device-vendor-manufacturer', 'VENDOR_MANUFACTURER'),
+        ...addOptionalField('device-vendor-model', 'VENDOR_MODEL'),
+        ...addOptionalField('device-vendor-name', 'VENDOR_NAME'),
+        ...addOptionalField('device-odm-brand', 'ODM_BRAND'),
+        ...addOptionalField('device-odm-device', 'ODM_DEVICE'),
+        ...addOptionalField('device-odm-manufacturer', 'ODM_MANUFACTURER'),
+        ...addOptionalField('device-odm-model', 'ODM_MODEL'),
+        ...addOptionalField('device-odm-name', 'ODM_NAME')
     };
     
     if (androidVersion) {
@@ -2815,7 +3002,23 @@ async function saveDevice(e) {
     }
     
     if (sdkInt) {
-        deviceData.SDK_INT = sdkInt;
+        const sdkValue = parseInt(sdkInt);
+        if (sdkValue >= 21 && sdkValue <= 35) {
+            deviceData.SDK_INT = sdkValue;
+        } else {
+            appendToOutput('SDK INT must be between 21 and 35', 'warning');
+        }
+    }
+    
+    // Validate CPU_CORES if provided
+    if (deviceData.CPU_CORES) {
+        const cpuCores = parseInt(deviceData.CPU_CORES);
+        if (cpuCores < 1 || cpuCores > 16) {
+            appendToOutput('CPU Cores must be between 1 and 16', 'warning');
+            delete deviceData.CPU_CORES;
+        } else {
+            deviceData.CPU_CORES = cpuCores;
+        }
     }
     
     try {
