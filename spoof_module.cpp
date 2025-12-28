@@ -508,6 +508,7 @@ public:
                 executeCompanionCommand("unmount_spoof");
             } else if (current_needs_cpu_spoof) {
                 executeCompanionCommand("mount_spoof");
+                executeCompanionCommand("mount_sys_spoof");
             }
 
             if (current_needs_device_spoof || current_needs_cpu_spoof || is_blacklisted) {
