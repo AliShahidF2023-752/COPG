@@ -594,119 +594,54 @@ private:
         return result == 0;
     }
 
+    void setSystemProperty(const std::string& property, const std::string& value) {
+        if (value.empty()) return;
+        std::string cmd = std::string("resetprop ") + property + " \"" + value + "\"";
+        if (executeCompanionCommand(cmd)) {
+            LOGD("Resetprop successful: %s=%s", property.c_str(), value.c_str());
+        } else {
+            LOGW("Resetprop failed: %s=%s", property.c_str(), value.c_str());
+        }
+    }
+
     void spoofSystemProps(const DeviceInfo& info) {
         SPOOF_LOG("Starting system props spoofing");
         
-        const char* commands[] = {
-            "ro.product.brand",
-            "ro.product.manufacturer", 
-            "ro.product.model",
-            "ro.product.device",
-            "ro.product.name",
-            "ro.build.fingerprint"
-        };
+        // Core device properties
+        setSystemProperty("ro.product.brand", info.brand);
+        setSystemProperty("ro.product.manufacturer", info.manufacturer);
+        setSystemProperty("ro.product.model", info.model);
+        setSystemProperty("ro.product.device", info.device);
+        setSystemProperty("ro.product.name", info.product);
+        setSystemProperty("ro.build.fingerprint", info.fingerprint);
         
-        const char* values[] = {
-            info.brand.c_str(),
-            info.manufacturer.c_str(),
-            info.model.c_str(),
-            info.device.c_str(),
-            info.product.c_str(),
-            info.fingerprint.c_str()
-        };
-        
-        const int num_commands = sizeof(commands) / sizeof(commands[0]);
-        
-        for (int i = 0; i < num_commands; i++) {
-            std::string cmd = std::string("resetprop ") + commands[i] + " \"" + values[i] + "\"";
-            if (executeCompanionCommand(cmd)) {
-                LOGD("Resetprop successful: %s", cmd.c_str());
-            } else {
-                LOGW("Resetprop failed: %s", cmd.c_str());
-            }
-        }
-        
-        // NEW hardware/SoC properties
-        if (!info.hardware.empty()) {
-            std::string cmd = std::string("resetprop ro.hardware \"") + info.hardware + "\"";
-            executeCompanionCommand(cmd);
-        }
-        if (!info.hardware_chipname.empty()) {
-            std::string cmd = std::string("resetprop ro.hardware.chipname \"") + info.hardware_chipname + "\"";
-            executeCompanionCommand(cmd);
-        }
-        if (!info.arch.empty()) {
-            std::string cmd = std::string("resetprop ro.arch \"") + info.arch + "\"";
-            executeCompanionCommand(cmd);
-        }
-        if (!info.revision.empty()) {
-            std::string cmd = std::string("resetprop ro.revision \"") + info.revision + "\"";
-            executeCompanionCommand(cmd);
-        }
-        if (!info.soc_manufacturer.empty()) {
-            std::string cmd = std::string("resetprop ro.soc.manufacturer \"") + info.soc_manufacturer + "\"";
-            executeCompanionCommand(cmd);
-        }
-        if (!info.soc_model.empty()) {
-            std::string cmd = std::string("resetprop ro.soc.model \"") + info.soc_model + "\"";
-            executeCompanionCommand(cmd);
-        }
-        if (!info.build_changelist.empty()) {
-            std::string cmd = std::string("resetprop ro.build.changelist \"") + info.build_changelist + "\"";
-            executeCompanionCommand(cmd);
-        }
-        if (!info.build_flavor.empty()) {
-            std::string cmd = std::string("resetprop ro.build.flavor \"") + info.build_flavor + "\"";
-            executeCompanionCommand(cmd);
-        }
-        if (!info.chipname.empty()) {
-            std::string cmd = std::string("resetprop ro.chipname \"") + info.chipname + "\"";
-            executeCompanionCommand(cmd);
-        }
-        if (!info.board_platform.empty()) {
-            std::string cmd = std::string("resetprop ro.board.platform \"") + info.board_platform + "\"";
-            executeCompanionCommand(cmd);
-        }
-        if (!info.mediatek_platform.empty()) {
-            std::string cmd = std::string("resetprop ro.mediatek.platform \"") + info.mediatek_platform + "\"";
-            executeCompanionCommand(cmd);
-        }
-        if (!info.product_board.empty()) {
-            std::string cmd = std::string("resetprop ro.product.board \"") + info.product_board + "\"";
-            executeCompanionCommand(cmd);
-        }
+        // Hardware/SoC properties
+        setSystemProperty("ro.hardware", info.hardware);
+        setSystemProperty("ro.hardware.chipname", info.hardware_chipname);
+        setSystemProperty("ro.arch", info.arch);
+        setSystemProperty("ro.revision", info.revision);
+        setSystemProperty("ro.soc.manufacturer", info.soc_manufacturer);
+        setSystemProperty("ro.soc.model", info.soc_model);
+        setSystemProperty("ro.build.changelist", info.build_changelist);
+        setSystemProperty("ro.build.flavor", info.build_flavor);
+        setSystemProperty("ro.chipname", info.chipname);
+        setSystemProperty("ro.board.platform", info.board_platform);
+        setSystemProperty("ro.mediatek.platform", info.mediatek_platform);
+        setSystemProperty("ro.product.board", info.product_board);
         
         if (info.should_spoof_android_version) {
-            const char* release_props[] = {
-                "ro.build.version.release",
-                "ro.system.build.version.release",
-                "ro.vendor.build.version.release",
-                "ro.product.build.version.release"
-            };
-            
-            for (const auto& prop : release_props) {
-                std::string cmd = std::string("resetprop ") + prop + " \"" + info.android_version + "\"";
-                if (executeCompanionCommand(cmd)) {
-                    LOGD("Resetprop successful for Android version: %s", cmd.c_str());
-                }
-            }
+            setSystemProperty("ro.build.version.release", info.android_version);
+            setSystemProperty("ro.system.build.version.release", info.android_version);
+            setSystemProperty("ro.vendor.build.version.release", info.android_version);
+            setSystemProperty("ro.product.build.version.release", info.android_version);
         }
         
         if (info.should_spoof_sdk_int) {
             std::string sdk_str = std::to_string(info.sdk_int);
-            const char* sdk_props[] = {
-                "ro.build.version.sdk",
-                "ro.system.build.version.sdk",
-                "ro.vendor.build.version.sdk",
-                "ro.product.build.version.sdk"
-            };
-            
-            for (const auto& prop : sdk_props) {
-                std::string cmd = std::string("resetprop ") + prop + " \"" + sdk_str + "\"";
-                if (executeCompanionCommand(cmd)) {
-                    LOGD("Resetprop successful for SDK: %s", cmd.c_str());
-                }
-            }
+            setSystemProperty("ro.build.version.sdk", sdk_str);
+            setSystemProperty("ro.system.build.version.sdk", sdk_str);
+            setSystemProperty("ro.vendor.build.version.sdk", sdk_str);
+            setSystemProperty("ro.product.build.version.sdk", sdk_str);
         }
         
         SPOOF_LOG("System props: model=%s, brand=%s", info.model.c_str(), info.brand.c_str());
