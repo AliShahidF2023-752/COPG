@@ -1,0 +1,32 @@
+# Build directories
+build/
+.gradle/
+.idea/
+*.iml
+
+# Downloaded dependencies (fetched during build)
+zygisk/
+include/
+
+# Build artifacts
+*.so
+*.o
+*.a
+controller_arm64
+controller_armv7
+controller
+json.hpp
+
+# Module packaging
+module/
+*.zip
+
+# Temporary files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# IDE files
+.vscode/
+*.code-workspace

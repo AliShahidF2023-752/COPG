@@ -370,12 +370,51 @@ fi
     chmod 0644 "$MODPATH/COPG.json" "$MODPATH/list.json" 2>/dev/null
     chmod 0444 "$MODPATH/cpuinfo_spoof" 2>/dev/null
     
+    # Create spoof directories for /sys and /proc spoofing
+    mkdir -p "$MODPATH/sys_spoof" "$MODPATH/proc_spoof" 2>/dev/null
+    
+    # Create default spoofed /sys files
+    echo "0-7" > "$MODPATH/sys_spoof/cpu_possible"
+    echo "0-7" > "$MODPATH/sys_spoof/cpu_present"
+    echo "0-7" > "$MODPATH/sys_spoof/cpu_online"
+    echo "7" > "$MODPATH/sys_spoof/kernel_max"
+    
+    # Create default spoofed /proc/stat
+    cat > "$MODPATH/proc_spoof/stat" << 'EOF'
+cpu  1000 500 200 10000 50 0 10 0 0 0
+cpu0 125 62 25 1250 6 0 1 0 0 0
+cpu1 125 62 25 1250 6 0 1 0 0 0
+cpu2 125 62 25 1250 6 0 1 0 0 0
+cpu3 125 62 25 1250 6 0 1 0 0 0
+cpu4 125 62 25 1250 6 0 1 0 0 0
+cpu5 125 62 25 1250 6 0 1 0 0 0
+cpu6 125 62 25 1250 6 0 1 0 0 0
+cpu7 125 62 25 1250 6 0 1 0 0 0
+EOF
+    
+    # Create default spoofed /proc/meminfo
+    cat > "$MODPATH/proc_spoof/meminfo" << 'EOF'
+MemTotal:        8000000 kB
+MemFree:         4000000 kB
+MemAvailable:    6000000 kB
+Buffers:          200000 kB
+Cached:          2000000 kB
+EOF
+    
+    # Set permissions on spoof files
+    chmod 0644 "$MODPATH/sys_spoof/"* 2>/dev/null
+    chmod 0644 "$MODPATH/proc_spoof/"* 2>/dev/null
+    
     for file in "$MODPATH/COPG.json" "$MODPATH/list.json" "$MODPATH/cpuinfo_spoof" \
                 "$MODPATH/service.sh" "$MODPATH/action.sh" "$MODPATH/update_config.sh"; do
       if [ -f "$file" ]; then
         chcon u:object_r:system_file:s0 "$file" 2>/dev/null
       fi
     done
+    
+    # Set SELinux context on spoof directories
+    chcon -R u:object_r:system_file:s0 "$MODPATH/sys_spoof" 2>/dev/null
+    chcon -R u:object_r:system_file:s0 "$MODPATH/proc_spoof" 2>/dev/null
   fi
 
   if $INSTALL_SUCCESS; then

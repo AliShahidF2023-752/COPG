@@ -4,6 +4,49 @@
 #### **Telegram Channel**:
 - https://t.me/COPG_module
 ---
+## v4.8.0 (Upcoming)
+### New Features: Comprehensive Hardware Detection Spoofing
+*   **Extended Hardware/SoC Property Spoofing:** Added support for 12 new `ro.*` system properties to bypass advanced hardware detection:
+    *   `ro.hardware` - Hardware name
+    *   `ro.hardware.chipname` - SoC chip name
+    *   `ro.arch` - CPU architecture (e.g., "arm64")
+    *   `ro.revision` - Hardware revision
+    *   `ro.soc.manufacturer` - SoC manufacturer (e.g., "Qualcomm")
+    *   `ro.soc.model` - SoC model (e.g., "SM8650")
+    *   `ro.build.changelist` - Build changelist
+    *   `ro.build.flavor` - Build flavor
+    *   `ro.chipname` - Chip name
+    *   `ro.board.platform` - Board platform
+    *   `ro.mediatek.platform` - MediaTek platform
+    *   `ro.product.board` - Product board
+*   **System File Spoofing:** Added mount-based spoofing for `/sys` and `/proc` filesystem paths:
+    *   `/sys/devices/system/cpu/possible` - Spoofed CPU count
+    *   `/sys/devices/system/cpu/present` - Spoofed CPU count
+    *   `/sys/devices/system/cpu/online` - Spoofed CPU count
+    *   `/sys/devices/system/cpu/kernel_max` - Spoofed max kernel CPU
+    *   `/proc/stat` - Spoofed system statistics
+    *   `/proc/meminfo` - Spoofed memory information
+*   **Enhanced Device Profiles:** Device profiles now support all new hardware/SoC properties and CPU core count specification.
+*   **Automatic Setup:** Installation script automatically creates spoofed file content with sensible defaults.
+
+### Improvements
+*   **Code Quality:** Refactored system property setting to use helper functions, reducing code duplication by ~60%.
+*   **Maintainability:** Added `.gitignore` for build artifacts and improved code structure.
+*   **Backward Compatibility:** All new fields are optional - existing device profiles continue to work without modification.
+
+### Technical Details
+*   Mount-based approach for file spoofing (cleaner and more maintainable than PLT hooking)
+*   Spoofed files only mounted when CPU spoofing is active for a package
+*   Compatible with existing CPU spoof functionality
+
+### Device Profile Examples Updated
+*   OnePlus 13 - Added complete hardware/SoC profile
+*   Samsung Galaxy Z Fold 5 - Added complete hardware/SoC profile
+
+### Notes
+*   This update addresses detection methods used by libraries like libliteavsdk, libonnxruntime, libncnn, libopencv_java4, libGCloudVoice, and libBugly_Native
+*   Properties are only set if specified in device configuration (non-empty values)
+
 ## v4.7.1
 ### HOTFIX Update
 - Added blocked tag to all device packages for safety

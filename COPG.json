@@ -143,7 +143,18 @@
     "MANUFACTURER": "OnePlus",
     "MODEL": "PJZ110",
     "FINGERPRINT": "OnePlus/PJZ110/OP5D0DL1:15/AP3A.240617.008/V.1bd19a1-1-2:user/release-keys",
-    "PRODUCT": "PJZ110"
+    "PRODUCT": "PJZ110",
+    "HARDWARE": "qcom",
+    "HARDWARE_CHIPNAME": "SM8750",
+    "SOC_MANUFACTURER": "Qualcomm",
+    "SOC_MODEL": "SM8750",
+    "ARCH": "arm64",
+    "BOARD_PLATFORM": "pineapple",
+    "PRODUCT_BOARD": "pineapple",
+    "REVISION": "0",
+    "BUILD_CHANGELIST": "12345678",
+    "BUILD_FLAVOR": "PJZ110-user",
+    "CPU_CORES": 8
   },
   "PACKAGES_REALME_P3_5G": [
     "com.dts.freefireth:blocked",
@@ -216,7 +227,18 @@
     "MANUFACTURER": "samsung",
     "MODEL": "SM-F9460",
     "FINGERPRINT": "samsung/q2qzh/q2q:15/UP1A.231005.007/F946BXXU1BWK4:user/release-keys",
-    "PRODUCT": "SM-F9460"
+    "PRODUCT": "SM-F9460",
+    "HARDWARE": "qcom",
+    "HARDWARE_CHIPNAME": "SM8550",
+    "SOC_MANUFACTURER": "Qualcomm",
+    "SOC_MODEL": "SM8550",
+    "ARCH": "arm64",
+    "BOARD_PLATFORM": "kalama",
+    "PRODUCT_BOARD": "kalama",
+    "REVISION": "0",
+    "BUILD_CHANGELIST": "12345678",
+    "BUILD_FLAVOR": "q2qzh-user",
+    "CPU_CORES": 8
   },
   "PACKAGES_HONOR_MAGIC_V2_RSR": [
     "com.gameloft.android.ANMP.GloftA9HM:blocked"
