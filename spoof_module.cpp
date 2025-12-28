@@ -46,6 +46,23 @@ struct DeviceInfo {
     int sdk_int;
     bool should_spoof_android_version = false;
     bool should_spoof_sdk_int = false;
+    
+    // Hardware/SoC properties
+    std::string hardware;           // ro.hardware
+    std::string hardware_chipname;  // ro.hardware.chipname
+    std::string arch;               // ro.arch (e.g., "arm64")
+    std::string revision;           // ro.revision
+    std::string soc_manufacturer;   // ro.soc.manufacturer (e.g., "Qualcomm")
+    std::string soc_model;          // ro.soc.model (e.g., "SM8650")
+    std::string build_changelist;   // ro.build.changelist
+    std::string build_flavor;       // ro.build.flavor
+    std::string chipname;           // ro.chipname
+    std::string board_platform;     // ro.board.platform
+    std::string mediatek_platform;  // ro.mediatek.platform
+    std::string product_board;      // ro.product.board
+    
+    // CPU spoofing info
+    int cpu_cores = 8;              // Number of CPU cores to report
 };
 
 struct BuildPropValues {
@@ -282,6 +299,86 @@ static void companion(int fd) {
             
             result = 0;
             COMPANION_LOG("Build props restored");
+        } else if (command == "create_sys_spoof_files") {
+            // Create directory structure
+            system("mkdir -p /data/adb/modules/COPG/sys_spoof");
+            system("mkdir -p /data/adb/modules/COPG/proc_spoof");
+            
+            // Create spoofed /sys/devices/system/cpu files
+            FILE* f = fopen("/data/adb/modules/COPG/sys_spoof/cpu_possible", "w");
+            if (f) {
+                fprintf(f, "0-7\n");
+                fclose(f);
+            }
+            
+            f = fopen("/data/adb/modules/COPG/sys_spoof/cpu_present", "w");
+            if (f) {
+                fprintf(f, "0-7\n");
+                fclose(f);
+            }
+            
+            f = fopen("/data/adb/modules/COPG/sys_spoof/cpu_online", "w");
+            if (f) {
+                fprintf(f, "0-7\n");
+                fclose(f);
+            }
+            
+            f = fopen("/data/adb/modules/COPG/sys_spoof/kernel_max", "w");
+            if (f) {
+                fprintf(f, "7\n");
+                fclose(f);
+            }
+            
+            // Create spoofed /proc files
+            f = fopen("/data/adb/modules/COPG/proc_spoof/stat", "w");
+            if (f) {
+                fprintf(f, "cpu  1000 500 200 10000 50 0 10 0 0 0\n");
+                fprintf(f, "cpu0 125 62 25 1250 6 0 1 0 0 0\n");
+                fprintf(f, "cpu1 125 62 25 1250 6 0 1 0 0 0\n");
+                fprintf(f, "cpu2 125 62 25 1250 6 0 1 0 0 0\n");
+                fprintf(f, "cpu3 125 62 25 1250 6 0 1 0 0 0\n");
+                fprintf(f, "cpu4 125 62 25 1250 6 0 1 0 0 0\n");
+                fprintf(f, "cpu5 125 62 25 1250 6 0 1 0 0 0\n");
+                fprintf(f, "cpu6 125 62 25 1250 6 0 1 0 0 0\n");
+                fprintf(f, "cpu7 125 62 25 1250 6 0 1 0 0 0\n");
+                fclose(f);
+            }
+            
+            f = fopen("/data/adb/modules/COPG/proc_spoof/meminfo", "w");
+            if (f) {
+                fprintf(f, "MemTotal:        8000000 kB\n");
+                fprintf(f, "MemFree:         4000000 kB\n");
+                fprintf(f, "MemAvailable:    6000000 kB\n");
+                fclose(f);
+            }
+            
+            result = 0;
+            COMPANION_LOG("Spoof files created");
+        } else if (command == "mount_sys_spoof") {
+            // Mount spoofed /sys files
+            if (access("/data/adb/modules/COPG/sys_spoof/cpu_possible", F_OK) == 0) {
+                system("/system/bin/mount --bind /data/adb/modules/COPG/sys_spoof/cpu_possible /sys/devices/system/cpu/possible 2>/dev/null");
+            }
+            if (access("/data/adb/modules/COPG/sys_spoof/cpu_present", F_OK) == 0) {
+                system("/system/bin/mount --bind /data/adb/modules/COPG/sys_spoof/cpu_present /sys/devices/system/cpu/present 2>/dev/null");
+            }
+            if (access("/data/adb/modules/COPG/sys_spoof/cpu_online", F_OK) == 0) {
+                system("/system/bin/mount --bind /data/adb/modules/COPG/sys_spoof/cpu_online /sys/devices/system/cpu/online 2>/dev/null");
+            }
+            if (access("/data/adb/modules/COPG/sys_spoof/kernel_max", F_OK) == 0) {
+                system("/system/bin/mount --bind /data/adb/modules/COPG/sys_spoof/kernel_max /sys/devices/system/cpu/kernel_max 2>/dev/null");
+            }
+            
+            // Mount spoofed /proc files
+            if (access("/data/adb/modules/COPG/proc_spoof/stat", F_OK) == 0) {
+                system("/system/bin/mount --bind /data/adb/modules/COPG/proc_spoof/stat /proc/stat 2>/dev/null");
+            }
+            if (access("/data/adb/modules/COPG/proc_spoof/meminfo", F_OK) == 0) {
+                system("/system/bin/mount --bind /data/adb/modules/COPG/proc_spoof/meminfo /proc/meminfo 2>/dev/null");
+            }
+            
+            result = 0;
+            COMPANION_LOG("Sys spoof mounted");
         }
         
         write(fd, &result, sizeof(result));
@@ -528,6 +625,56 @@ private:
             }
         }
         
+        // NEW hardware/SoC properties
+        if (!info.hardware.empty()) {
+            std::string cmd = std::string("resetprop ro.hardware \"") + info.hardware + "\"";
+            executeCompanionCommand(cmd);
+        }
+        if (!info.hardware_chipname.empty()) {
+            std::string cmd = std::string("resetprop ro.hardware.chipname \"") + info.hardware_chipname + "\"";
+            executeCompanionCommand(cmd);
+        }
+        if (!info.arch.empty()) {
+            std::string cmd = std::string("resetprop ro.arch \"") + info.arch + "\"";
+            executeCompanionCommand(cmd);
+        }
+        if (!info.revision.empty()) {
+            std::string cmd = std::string("resetprop ro.revision \"") + info.revision + "\"";
+            executeCompanionCommand(cmd);
+        }
+        if (!info.soc_manufacturer.empty()) {
+            std::string cmd = std::string("resetprop ro.soc.manufacturer \"") + info.soc_manufacturer + "\"";
+            executeCompanionCommand(cmd);
+        }
+        if (!info.soc_model.empty()) {
+            std::string cmd = std::string("resetprop ro.soc.model \"") + info.soc_model + "\"";
+            executeCompanionCommand(cmd);
+        }
+        if (!info.build_changelist.empty()) {
+            std::string cmd = std::string("resetprop ro.build.changelist \"") + info.build_changelist + "\"";
+            executeCompanionCommand(cmd);
+        }
+        if (!info.build_flavor.empty()) {
+            std::string cmd = std::string("resetprop ro.build.flavor \"") + info.build_flavor + "\"";
+            executeCompanionCommand(cmd);
+        }
+        if (!info.chipname.empty()) {
+            std::string cmd = std::string("resetprop ro.chipname \"") + info.chipname + "\"";
+            executeCompanionCommand(cmd);
+        }
+        if (!info.board_platform.empty()) {
+            std::string cmd = std::string("resetprop ro.board.platform \"") + info.board_platform + "\"";
+            executeCompanionCommand(cmd);
+        }
+        if (!info.mediatek_platform.empty()) {
+            std::string cmd = std::string("resetprop ro.mediatek.platform \"") + info.mediatek_platform + "\"";
+            executeCompanionCommand(cmd);
+        }
+        if (!info.product_board.empty()) {
+            std::string cmd = std::string("resetprop ro.product.board \"") + info.product_board + "\"";
+            executeCompanionCommand(cmd);
+        }
+        
         if (info.should_spoof_android_version) {
             const char* release_props[] = {
                 "ro.build.version.release",
@@ -702,6 +849,21 @@ private:
                     } else {
                         info.should_spoof_sdk_int = false;
                     }
+
+                    // Parse new hardware/SoC properties
+                    info.hardware = device.value("HARDWARE", "");
+                    info.hardware_chipname = device.value("HARDWARE_CHIPNAME", "");
+                    info.arch = device.value("ARCH", "");
+                    info.revision = device.value("REVISION", "");
+                    info.soc_manufacturer = device.value("SOC_MANUFACTURER", "");
+                    info.soc_model = device.value("SOC_MODEL", "");
+                    info.build_changelist = device.value("BUILD_CHANGELIST", "");
+                    info.build_flavor = device.value("BUILD_FLAVOR", "");
+                    info.chipname = device.value("CHIPNAME", "");
+                    info.board_platform = device.value("BOARD_PLATFORM", "");
+                    info.mediatek_platform = device.value("MEDIATEK_PLATFORM", "");
+                    info.product_board = device.value("PRODUCT_BOARD", "");
+                    info.cpu_cores = device.value("CPU_CORES", 8);
 
                     std::unordered_map<std::string, std::string> package_settings;
                     
