@@ -12,6 +12,7 @@
       "com.miraclegames.farlight84"
     ]
   },
+
   "PACKAGES_REDMAGIC_10_PRO": [
     "com.kurogame.wutheringwaves.global:blocked",
     "com.vng.codmvn:blocked",
@@ -20,15 +21,15 @@
   ],
   "PACKAGES_REDMAGIC_10_PRO_DEVICE": {
     "BRAND": "nubia",
-    "DEVICE": "NX789J",
+    "DEVICE": "REDMAGIC 10 Pro",
     "MANUFACTURER": "nubia",
     "MODEL": "NX789J",
     "FINGERPRINT": "nubia/NX789J-UN/NX789J:15/AQ3A.240812.002/20241212.194919:user/release-keys",
     "PRODUCT": "NX789J",
     "HARDWARE": "qcom",
-    "HARDWARE_CHIPNAME": "SM8750-AB",
+    "HARDWARE_CHIPNAME": "SM8750",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "SM8750-AB",
+    "SOC_MODEL": "Snapdragon 8 Elite",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "pineapple",
     "PRODUCT_BOARD": "pineapple",
@@ -36,16 +37,17 @@
     "BUILD_VERSION_SDK": "35",
     "BUILD_VERSION_RELEASE": "15",
     "BUILD_VERSION_CODENAME": "REL",
-    "BUILD_CHANGELIST": "12345678",
+    "BUILD_CHANGELIST": "20241212.194919",
     "BUILD_FLAVOR": "NX789J-user",
     "BUILD_ID": "AQ3A.240812.002",
     "BUILD_TAGS": "release-keys",
     "BUILD_TYPE": "user",
     "CPU_CORES": 8,
-    "CHIPNAME": "SM8750-AB",
+    "CHIPNAME": "SM8750",
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "en_US"
   },
+
   "PACKAGES_REDMAGIC_9_PRO": [
     "com.supercell.brawlstars:blocked",
     "com.blizzard.diablo.immortal:blocked",
@@ -69,15 +71,15 @@
   ],
   "PACKAGES_REDMAGIC_9_PRO_DEVICE": {
     "BRAND": "nubia",
-    "DEVICE": "NX769J",
+    "DEVICE": "REDMAGIC 9 Pro",
     "MANUFACTURER": "nubia",
     "MODEL": "NX769J",
     "FINGERPRINT": "nubia/NX769J/NX769J:14/UKQ1.230917.001/20240813.173312:user/release-keys",
     "PRODUCT": "NX769J",
     "HARDWARE": "qcom",
-    "HARDWARE_CHIPNAME": "SM8650-AB",
+    "HARDWARE_CHIPNAME": "SM8650",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "SM8650-AB",
+    "SOC_MODEL": "Snapdragon 8 Gen 3",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "kalama",
     "PRODUCT_BOARD": "kalama",
@@ -91,30 +93,31 @@
     "BUILD_TAGS": "release-keys",
     "BUILD_TYPE": "user",
     "CPU_CORES": 8,
-    "CHIPNAME": "SM8650-AB",
+    "CHIPNAME": "SM8650",
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "en_US"
   },
+
   "PACKAGES_BLACK_SHARK_4_(CHINA)": [
     "com.proximabeta.mf.uamo:blocked"
   ],
   "PACKAGES_BLACK_SHARK_4_(CHINA)_DEVICE": {
     "BRAND": "Black Shark",
-    "DEVICE": "2SM-X706B",
+    "DEVICE": "Black Shark 4 (China)",
     "MANUFACTURER": "Xiaomi",
-    "MODEL": "2SM-X706B",
+    "MODEL": "SHARK PRS-H0",
     "FINGERPRINT": "BlackShark/PRS-H0/Black Shark 4:13/TQ3A.230805.001/20230315:user/release-keys",
-    "PRODUCT": "2SM-X706B",
+    "PRODUCT": "PRS-H0",
     "HARDWARE": "qcom",
-    "HARDWARE_CHIPNAME": "SM8250-AC",
+    "HARDWARE_CHIPNAME": "SM8250",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "SM8250-AC",
+    "SOC_MODEL": "Snapdragon 870 5G",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "kona",
     "PRODUCT_BOARD": "kona",
     "REVISION": "0",
-    "BUILD_VERSION_SDK": "33",
-    "BUILD_VERSION_RELEASE": "13",
+    "BUILD_VERSION_SDK": "30",
+    "BUILD_VERSION_RELEASE": "11",
     "BUILD_VERSION_CODENAME": "REL",
     "BUILD_CHANGELIST": "20230315",
     "BUILD_FLAVOR": "PRS-H0-user",
@@ -122,10 +125,11 @@
     "BUILD_TAGS": "release-keys",
     "BUILD_TYPE": "user",
     "CPU_CORES": 8,
-    "CHIPNAME": "SM8250-AC",
+    "CHIPNAME": "SM8250",
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "zh_CN"
   },
+
   "PACKAGES_XIAOMI_11T_PRO": [
     "com.levelinfinite.hotta.gp:blocked",
     "com.supercell.clashofclans:blocked",
@@ -133,15 +137,15 @@
   ],
   "PACKAGES_XIAOMI_11T_PRO_DEVICE": {
     "BRAND": "Xiaomi",
-    "DEVICE": "vili",
+    "DEVICE": "Xiaomi 11T Pro",
     "MANUFACTURER": "Xiaomi",
     "MODEL": "2107113SG",
-    "FINGERPRINT": "Xiaomi/2107113SG/vili:13/RKQ1.211001.001/20230410:user/release-keys",
+    "FINGERPRINT": "Xiaomi/2107113SI/Mi 11T Pro:13/RKQ1.211001.001/20230410:user/release-keys",
     "PRODUCT": "2107113SG",
     "HARDWARE": "qcom",
     "HARDWARE_CHIPNAME": "SM8350",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "SM8350",
+    "SOC_MODEL": "Snapdragon 888",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "lahaina",
     "PRODUCT_BOARD": "lahaina",
@@ -159,6 +163,7 @@
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "en_US"
   },
+
   "PACKAGES_XIAOMI_13_PRO": [
     "com.levelinfinite.sgameGlobal:blocked",
     "com.tencent.tmgp.sgame:blocked",
@@ -176,12 +181,12 @@
     "DEVICE": "nuwa",
     "MANUFACTURER": "Xiaomi",
     "MODEL": "2210132G",
-    "FINGERPRINT": "Xiaomi/nuwa_eea/nuwa:13/TKQ1.221114.001/OS2.0.102.0.VMCEUXM:user/release-keys",
-    "PRODUCT": "2210132G",
+    "FINGERPRINT": "Xiaomi/nuwa_eea/nuwa:13/TKQ1.221114.001/V14.0.2.0.UMBMIXM:user/release-keys",
+    "PRODUCT": "nuwa",
     "HARDWARE": "qcom",
-    "HARDWARE_CHIPNAME": "SM8550-AB",
+    "HARDWARE_CHIPNAME": "SM8550",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "SM8550-AB",
+    "SOC_MODEL": "Snapdragon 8 Gen 2",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "kalama",
     "PRODUCT_BOARD": "kalama",
@@ -189,16 +194,17 @@
     "BUILD_VERSION_SDK": "33",
     "BUILD_VERSION_RELEASE": "13",
     "BUILD_VERSION_CODENAME": "REL",
-    "BUILD_CHANGELIST": "20230601",
+    "BUILD_CHANGELIST": "V14.0.2.0.UMBMIXM",
     "BUILD_FLAVOR": "nuwa_eea-user",
     "BUILD_ID": "TKQ1.221114.001",
     "BUILD_TAGS": "release-keys",
     "BUILD_TYPE": "user",
     "CPU_CORES": 8,
-    "CHIPNAME": "SM8550-AB",
+    "CHIPNAME": "SM8550",
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "en_US"
   },
+
   "PACKAGES_ONEPLUS_8_PRO_5G": [
     "com.netease.lztgglobal:blocked",
     "com.riotgames.league.wildrift:blocked",
@@ -207,7 +213,7 @@
   ],
   "PACKAGES_ONEPLUS_8_PRO_5G_DEVICE": {
     "BRAND": "OnePlus",
-    "DEVICE": "OnePlus8Pro",
+    "DEVICE": "OnePlus 8 Pro 5G",
     "MANUFACTURER": "OnePlus",
     "MODEL": "IN2023",
     "FINGERPRINT": "OnePlus/IN2023/OnePlus8Pro:13/RKQ1.211119.001/20230501:user/release-keys",
@@ -215,7 +221,7 @@
     "HARDWARE": "qcom",
     "HARDWARE_CHIPNAME": "SM8250",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "SM8250",
+    "SOC_MODEL": "Snapdragon 865",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "kona",
     "PRODUCT_BOARD": "kona",
@@ -233,6 +239,7 @@
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "en_US"
   },
+
   "PACKAGES_ROG_PHONE_6D_ULTIMATE": [
     "com.madfingergames.legends:blocked",
     "com.pearlabyss.blackdesertm:blocked",
@@ -240,7 +247,7 @@
   ],
   "PACKAGES_ROG_PHONE_6D_ULTIMATE_DEVICE": {
     "BRAND": "ASUS",
-    "DEVICE": "AI2203",
+    "DEVICE": "ROG Phone 6D Ultimate",
     "MANUFACTURER": "ASUS",
     "MODEL": "AI2203",
     "FINGERPRINT": "ASUS/AI2203/ROG Phone 6D:14/UP1A.231005.007/20240315:user/release-keys",
@@ -248,7 +255,7 @@
     "HARDWARE": "mt6985",
     "HARDWARE_CHIPNAME": "MT6985",
     "SOC_MANUFACTURER": "MediaTek",
-    "SOC_MODEL": "MT6985",
+    "SOC_MODEL": "Dimensity 9000+",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "mt6985",
     "PRODUCT_BOARD": "mt6985",
@@ -266,12 +273,13 @@
     "MEDIATEK_PLATFORM": "mt6985",
     "LOCAL": "en_US"
   },
+
   "PACKAGES_LEGION_Y700_(2023)": [
     "com.activision.callofduty.shooter:blocked"
   ],
   "PACKAGES_LEGION_Y700_(2023)_DEVICE": {
     "BRAND": "Lenovo",
-    "DEVICE": "TB-9707F",
+    "DEVICE": "Legion Y700 (2023)",
     "MANUFACTURER": "Lenovo",
     "MODEL": "TB-9707F",
     "FINGERPRINT": "Lenovo/TB-9707F/Lenovo TB-9707F:13/TQ3A.230805.001/20230901:user/release-keys",
@@ -279,7 +287,7 @@
     "HARDWARE": "qcom",
     "HARDWARE_CHIPNAME": "SM8475",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "SM8475",
+    "SOC_MODEL": "Snapdragon 8+ Gen 1",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "taro",
     "PRODUCT_BOARD": "taro",
@@ -297,6 +305,7 @@
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "en_US"
   },
+
   "PACKAGES_XIAOMI_13": [
     "com.tencent.lolm:blocked"
   ],
@@ -308,9 +317,9 @@
     "FINGERPRINT": "Xiaomi/fuxi_eea/fuxi:13/TKQ1.221114.001/OS2.0.102.0.VMCEUXM:user/release-keys",
     "PRODUCT": "2211133G",
     "HARDWARE": "qcom",
-    "HARDWARE_CHIPNAME": "SM8550-AB",
+    "HARDWARE_CHIPNAME": "SM8550",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "SM8550-AB",
+    "SOC_MODEL": "Snapdragon 8 Gen 2",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "kalama",
     "PRODUCT_BOARD": "kalama",
@@ -324,24 +333,25 @@
     "BUILD_TAGS": "release-keys",
     "BUILD_TYPE": "user",
     "CPU_CORES": 8,
-    "CHIPNAME": "SM8550-AB",
+    "CHIPNAME": "SM8550",
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "en_US"
   },
+
   "PACKAGES_ONEPLUS_13": [
     "com.proxima.dfm:blocked"
   ],
   "PACKAGES_ONEPLUS_13_DEVICE": {
     "BRAND": "OnePlus",
-    "DEVICE": "OP5D0DL1",
+    "DEVICE": "OnePlus 13",
     "MANUFACTURER": "OnePlus",
     "MODEL": "PJZ110",
     "FINGERPRINT": "OnePlus/PJZ110/OP5D0DL1:15/AP3A.240617.008/V.1bd19a1-1-2:user/release-keys",
     "PRODUCT": "PJZ110",
     "HARDWARE": "qcom",
-    "HARDWARE_CHIPNAME": "SM8750-AB",
+    "HARDWARE_CHIPNAME": "SM8750",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "SM8750-AB",
+    "SOC_MODEL": "Snapdragon 8 Elite",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "pineapple",
     "PRODUCT_BOARD": "pineapple",
@@ -349,31 +359,32 @@
     "BUILD_VERSION_SDK": "35",
     "BUILD_VERSION_RELEASE": "15",
     "BUILD_VERSION_CODENAME": "REL",
-    "BUILD_CHANGELIST": "12345678",
+    "BUILD_CHANGELIST": "V.1bd19a1-1-2",
     "BUILD_FLAVOR": "PJZ110-user",
     "BUILD_ID": "AP3A.240617.008",
     "BUILD_TAGS": "release-keys",
     "BUILD_TYPE": "user",
     "CPU_CORES": 8,
-    "CHIPNAME": "SM8750-AB",
+    "CHIPNAME": "SM8750",
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "en_US"
   },
+
   "PACKAGES_REALME_P3_5G": [
     "com.dts.freefireth:blocked",
     "com.dts.freefiremax:blocked"
   ],
   "PACKAGES_REALME_P3_5G_DEVICE": {
     "BRAND": "realme",
-    "DEVICE": "RMX5070",
+    "DEVICE": "Realme P3 5G",
     "MANUFACTURER": "realme",
     "MODEL": "RMX5070",
     "FINGERPRINT": "realme/RMX5070/RMX5070:15/SKQ1.230119.001/eng.user.20250415.155201:user/release-keys",
     "PRODUCT": "RMX5070",
     "HARDWARE": "qcom",
-    "HARDWARE_CHIPNAME": "SM6450",
+    "HARDWARE_CHIPNAME": "SM7435",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "SM6450",
+    "SOC_MODEL": "Snapdragon 7s Gen 2",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "holi",
     "PRODUCT_BOARD": "holi",
@@ -387,25 +398,25 @@
     "BUILD_TAGS": "release-keys",
     "BUILD_TYPE": "user",
     "CPU_CORES": 8,
-    "CHIPNAME": "SM6450",
+    "CHIPNAME": "SM7435",
     "MEDIATEK_PLATFORM": "",
-    "LOCAL": "en_US",
-    "NOTE": "Snapdragon 6 Gen 4 uses internal model SM6450 (same numbering as 6 Gen 1)"
+    "LOCAL": "en_US"
   },
+
   "PACKAGES_PIXEL_XL": [
     "com.google.android.apps.photos:notweak"
   ],
   "PACKAGES_PIXEL_XL_DEVICE": {
     "BRAND": "google",
-    "DEVICE": "marlin",
+    "DEVICE": "Pixel XL",
     "MANUFACTURER": "Google",
-    "MODEL": "Pixel XL",
+    "MODEL": "marlin",
     "FINGERPRINT": "google/marlin/marlin:10/QP1A.191005.007.A3/5972272:user/release-keys",
     "PRODUCT": "marlin",
     "HARDWARE": "marlin",
     "HARDWARE_CHIPNAME": "MSM8996",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "MSM8996",
+    "SOC_MODEL": "Snapdragon 821",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "msm8996",
     "PRODUCT_BOARD": "marlin",
@@ -423,6 +434,7 @@
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "en_US"
   },
+
   "PACKAGES_REALME_15_PRO_5G": [
     "com.ngame.allstar.eu:blocked",
     "com.clashoftitansandroid.india:blocked",
@@ -441,15 +453,15 @@
   ],
   "PACKAGES_REALME_15_PRO_5G_DEVICE": {
     "BRAND": "realme",
-    "DEVICE": "RE60B4L1",
+    "DEVICE": "Realme 15 Pro 5G",
     "MANUFACTURER": "realme",
     "MODEL": "RMX5101",
     "FINGERPRINT": "realme/RMX5101IN/RE60B4L1:15/AP3A.240617.008/V.R4T2.26cec0e-80bb4e-80b757:user/release-keys",
     "PRODUCT": "RMX5101",
     "HARDWARE": "qcom",
-    "HARDWARE_CHIPNAME": "SM7750-AB",
+    "HARDWARE_CHIPNAME": "SM7550",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "SM7750-AB",
+    "SOC_MODEL": "Snapdragon 7+ Gen 3",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "parrot",
     "PRODUCT_BOARD": "parrot",
@@ -463,24 +475,25 @@
     "BUILD_TAGS": "release-keys",
     "BUILD_TYPE": "user",
     "CPU_CORES": 8,
-    "CHIPNAME": "SM7750-AB",
+    "CHIPNAME": "SM7550",
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "en_IN"
   },
+
   "PACKAGES_GALAXY_Z_FOLD_5": [
     "com.ea.gp.fifamobile:blocked"
   ],
   "PACKAGES_GALAXY_Z_FOLD_5_DEVICE": {
     "BRAND": "samsung",
-    "DEVICE": "q2q",
+    "DEVICE": "Galaxy Z Fold 5",
     "MANUFACTURER": "samsung",
     "MODEL": "SM-F9460",
     "FINGERPRINT": "samsung/q2qzh/q2q:15/UP1A.231005.007/F946BXXU1BWK4:user/release-keys",
     "PRODUCT": "SM-F9460",
     "HARDWARE": "qcom",
-    "HARDWARE_CHIPNAME": "SM8550-AC",
+    "HARDWARE_CHIPNAME": "SM8550",
     "SOC_MANUFACTURER": "Qualcomm",
-    "SOC_MODEL": "SM8550-AC",
+    "SOC_MODEL": "Snapdragon 8 Gen 2",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "kalama",
     "PRODUCT_BOARD": "kalama",
@@ -494,16 +507,17 @@
     "BUILD_TAGS": "release-keys",
     "BUILD_TYPE": "user",
     "CPU_CORES": 8,
-    "CHIPNAME": "SM8550-AC",
+    "CHIPNAME": "SM8550",
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "zh_CN"
   },
+
   "PACKAGES_HONOR_MAGIC_V2_RSR": [
     "com.gameloft.android.ANMP.GloftA9HM:blocked"
   ],
   "PACKAGES_HONOR_MAGIC_V2_RSR_DEVICE": {
     "BRAND": "HONOR",
-    "DEVICE": "VER-N49DP",
+    "DEVICE": "Honor Magic V2 RSR",
     "MANUFACTURER": "HONOR",
     "MODEL": "VER-N49DP",
     "FINGERPRINT": "HONOR/VER-N49DP/VER:13/ENG.20240918.123456:user/release-keys",
@@ -511,7 +525,7 @@
     "HARDWARE": "kirin",
     "HARDWARE_CHIPNAME": "KIRIN9000S",
     "SOC_MANUFACTURER": "HiSilicon",
-    "SOC_MODEL": "KIRIN9000S",
+    "SOC_MODEL": "Kirin 9000S",
     "ARCH": "arm64",
     "BOARD_PLATFORM": "kirin9000s",
     "PRODUCT_BOARD": "kirin9000s",
@@ -529,6 +543,7 @@
     "MEDIATEK_PLATFORM": "",
     "LOCAL": "zh_CN"
   },
+
   "WEB_UI_CONFIG": {
     "customization_enabled": true,
     "editable_fields": [
@@ -594,4 +609,9 @@
     "sys_paths_to_spoof": [
       "/sys/devices/system/cpu/cpu",
       "/sys/devices/system/cpu/possible",
-      "/sys/
+      "/sys/devices/system/cpu/present"
+    ],
+    "build_prop_location": "/system/build.prop",
+    "vendor_build_prop_location": "/vendor/build.prop"
+  }
+}
