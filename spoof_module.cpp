@@ -63,6 +63,26 @@ struct DeviceInfo {
     
     // CPU spoofing info
     int cpu_cores = 8;              // Number of CPU cores to report
+    
+    // Extended fingerprints (Android 12+)
+    std::string vendor_fingerprint;     // ro.vendor.build.fingerprint
+    std::string system_fingerprint;     // ro.system.build.fingerprint
+    std::string system_ext_fingerprint; // ro.system_ext.build.fingerprint
+    std::string odm_fingerprint;        // ro.odm.build.fingerprint
+    std::string bootimage_fingerprint;  // ro.bootimage.build.fingerprint
+    std::string product_fingerprint;    // ro.product.build.fingerprint
+    
+    // Vendor/ODM product properties
+    std::string vendor_brand;           // ro.product.vendor.brand
+    std::string vendor_device;          // ro.product.vendor.device
+    std::string vendor_manufacturer;    // ro.product.vendor.manufacturer
+    std::string vendor_model;           // ro.product.vendor.model
+    std::string vendor_name;            // ro.product.vendor.name
+    std::string odm_brand;              // ro.product.odm.brand
+    std::string odm_device;             // ro.product.odm.device
+    std::string odm_manufacturer;       // ro.product.odm.manufacturer
+    std::string odm_model;              // ro.product.odm.model
+    std::string odm_name;               // ro.product.odm.name
 };
 
 struct BuildPropValues {
@@ -629,6 +649,26 @@ private:
         setSystemProperty("ro.mediatek.platform", info.mediatek_platform);
         setSystemProperty("ro.product.board", info.product_board);
         
+        // Extended fingerprints (Android 12+)
+        setSystemProperty("ro.vendor.build.fingerprint", info.vendor_fingerprint);
+        setSystemProperty("ro.system.build.fingerprint", info.system_fingerprint);
+        setSystemProperty("ro.system_ext.build.fingerprint", info.system_ext_fingerprint);
+        setSystemProperty("ro.odm.build.fingerprint", info.odm_fingerprint);
+        setSystemProperty("ro.bootimage.build.fingerprint", info.bootimage_fingerprint);
+        setSystemProperty("ro.product.build.fingerprint", info.product_fingerprint);
+        
+        // Vendor/ODM product properties
+        setSystemProperty("ro.product.vendor.brand", info.vendor_brand);
+        setSystemProperty("ro.product.vendor.device", info.vendor_device);
+        setSystemProperty("ro.product.vendor.manufacturer", info.vendor_manufacturer);
+        setSystemProperty("ro.product.vendor.model", info.vendor_model);
+        setSystemProperty("ro.product.vendor.name", info.vendor_name);
+        setSystemProperty("ro.product.odm.brand", info.odm_brand);
+        setSystemProperty("ro.product.odm.device", info.odm_device);
+        setSystemProperty("ro.product.odm.manufacturer", info.odm_manufacturer);
+        setSystemProperty("ro.product.odm.model", info.odm_model);
+        setSystemProperty("ro.product.odm.name", info.odm_name);
+        
         if (info.should_spoof_android_version) {
             setSystemProperty("ro.build.version.release", info.android_version);
             setSystemProperty("ro.system.build.version.release", info.android_version);
@@ -800,6 +840,26 @@ private:
                     info.mediatek_platform = device.value("MEDIATEK_PLATFORM", "");
                     info.product_board = device.value("PRODUCT_BOARD", "");
                     info.cpu_cores = device.value("CPU_CORES", 8);
+                    
+                    // Parse extended fingerprints
+                    info.vendor_fingerprint = device.value("VENDOR_FINGERPRINT", "");
+                    info.system_fingerprint = device.value("SYSTEM_FINGERPRINT", "");
+                    info.system_ext_fingerprint = device.value("SYSTEM_EXT_FINGERPRINT", "");
+                    info.odm_fingerprint = device.value("ODM_FINGERPRINT", "");
+                    info.bootimage_fingerprint = device.value("BOOTIMAGE_FINGERPRINT", "");
+                    info.product_fingerprint = device.value("PRODUCT_FINGERPRINT", "");
+                    
+                    // Parse vendor/ODM product properties
+                    info.vendor_brand = device.value("VENDOR_BRAND", "");
+                    info.vendor_device = device.value("VENDOR_DEVICE", "");
+                    info.vendor_manufacturer = device.value("VENDOR_MANUFACTURER", "");
+                    info.vendor_model = device.value("VENDOR_MODEL", "");
+                    info.vendor_name = device.value("VENDOR_NAME", "");
+                    info.odm_brand = device.value("ODM_BRAND", "");
+                    info.odm_device = device.value("ODM_DEVICE", "");
+                    info.odm_manufacturer = device.value("ODM_MANUFACTURER", "");
+                    info.odm_model = device.value("ODM_MODEL", "");
+                    info.odm_name = device.value("ODM_NAME", "");
 
                     std::unordered_map<std::string, std::string> package_settings;
                     
