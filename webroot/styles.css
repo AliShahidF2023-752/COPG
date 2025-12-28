@@ -5202,3 +5202,133 @@ input:checked ~ .slider ~ .toggle-label .modal-badge {
     background-color: rgba(16, 185, 129, 0.1) !important;
     box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.3) !important;
 }
+
+/* Collapsible Section Styles */
+.collapsible-section {
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--card-bg);
+    transition: all 0.3s ease;
+}
+
+.dark-theme .collapsible-section {
+    border-color: var(--dark-border);
+    background: var(--dark-card);
+}
+
+.collapsible-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+    background: var(--background);
+    transition: all 0.2s ease;
+}
+
+.dark-theme .collapsible-section .section-header {
+    background: var(--dark-bg);
+}
+
+.collapsible-section .section-header:hover {
+    background: rgba(96, 165, 250, 0.05);
+}
+
+.dark-theme .collapsible-section .section-header:hover {
+    background: rgba(96, 165, 250, 0.1);
+}
+
+.collapsible-section .section-header h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.dark-theme .collapsible-section .section-header h4 {
+    color: var(--dark-text);
+}
+
+.collapsible-section .section-header .chevron {
+    transition: transform 0.3s ease;
+    stroke: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.dark-theme .collapsible-section .section-header .chevron {
+    stroke: var(--dark-text-secondary);
+}
+
+.collapsible-section.expanded .section-header .chevron {
+    transform: rotate(180deg);
+}
+
+.collapsible-section .section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    padding: 0 16px;
+}
+
+.collapsible-section.expanded .section-content {
+    max-height: 2000px;
+    padding: 16px;
+}
+
+.helper-text {
+    display: block;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    font-style: italic;
+}
+
+.dark-theme .helper-text {
+    color: var(--dark-text-secondary);
+}
+
+/* Device Form Preset Selector */
+#device-preset {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    background: var(--background);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#device-preset:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 8px rgba(96, 165, 250, 0.3);
+}
+
+.dark-theme #device-preset {
+    background: var(--dark-bg);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+/* Adjust modal content to handle more fields */
+#device-modal .scroll-container {
+    max-height: calc(80vh - 200px);
+    overflow-y: auto;
+}
+
+@media (max-height: 800px) {
+    #device-modal .scroll-container {
+        max-height: calc(70vh - 150px);
+    }
+}
+
+@media (max-height: 600px) {
+    #device-modal .scroll-container {
+        max-height: calc(60vh - 120px);
+    }
+}

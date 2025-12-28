@@ -533,47 +533,309 @@
             </div>
             <form id="device-form">
                 <div class="scroll-container">
+                    <!-- Preset Template Selector -->
                     <div class="form-group">
-                        <label for="device-name">
-                            Device Name<span class="required-badge">required</span>
+                        <label for="device-preset">
+                            Hardware Preset<span class="optional-badge">optional</span>
                         </label>
-                        <input type="text" id="device-name" placeholder="e.g., Galaxy S23" required>
+                        <select id="device-preset">
+                            <option value="">-- Select Preset (Optional) --</option>
+                            <option value="snapdragon_8_gen_3">Snapdragon 8 Gen 3 (SM8650) - Qualcomm</option>
+                            <option value="snapdragon_8_gen_2">Snapdragon 8 Gen 2 (SM8550) - Qualcomm</option>
+                            <option value="snapdragon_8_gen_1">Snapdragon 8 Gen 1 (SM8450) - Qualcomm</option>
+                            <option value="dimensity_9300">Dimensity 9300 (MT6985) - MediaTek</option>
+                            <option value="exynos_2400">Exynos 2400 - Samsung</option>
+                            <option value="tensor_g4">Google Tensor G4 - Pixel 9</option>
+                        </select>
+                        <small class="helper-text">Quickly fill hardware fields with preset values</small>
                     </div>
-                    <div class="form-group">
-                        <label for="device-brand">
-                            Brand<span class="required-badge">required</span>
-                        </label>
-                        <input type="text" id="device-brand" placeholder="e.g., Samsung">
+
+                    <!-- Basic Info Section (Always Expanded) -->
+                    <div class="collapsible-section expanded">
+                        <div class="section-header" onclick="toggleSection(this)">
+                            <h4>Basic Information</h4>
+                            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="section-content">
+                            <div class="form-group">
+                                <label for="device-name">
+                                    Device Name<span class="required-badge">required</span>
+                                </label>
+                                <input type="text" id="device-name" placeholder="e.g., Galaxy S24 Ultra" required>
+                                <small class="helper-text">Display name for the device profile</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-brand">
+                                    Brand<span class="required-badge">required</span>
+                                </label>
+                                <input type="text" id="device-brand" placeholder="e.g., samsung">
+                                <small class="helper-text">ro.product.brand</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-model">
+                                    Model<span class="required-badge">required</span>
+                                </label>
+                                <input type="text" id="device-model" placeholder="e.g., SM-S928B">
+                                <small class="helper-text">ro.product.model</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-manufacturer">
+                                    Manufacturer<span class="required-badge">required</span>
+                                </label>
+                                <input type="text" id="device-manufacturer" placeholder="e.g., samsung">
+                                <small class="helper-text">ro.product.manufacturer</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-device">
+                                    Device<span class="optional-badge">optional</span>
+                                </label>
+                                <input type="text" id="device-device" placeholder="e.g., e3q">
+                                <small class="helper-text">ro.product.device</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-product">
+                                    Product<span class="optional-badge">optional</span>
+                                </label>
+                                <input type="text" id="device-product" placeholder="e.g., e3qxxx">
+                                <small class="helper-text">ro.product.name</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-fingerprint">
+                                    Fingerprint<span class="required-badge">required</span>
+                                </label>
+                                <input type="text" id="device-fingerprint" placeholder="samsung/e3qxxx/e3q:14/UP1A.231005.007/S928BXXS1AXXX:user/release-keys">
+                                <small class="helper-text">ro.build.fingerprint</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="device-model">
-                            Model<span class="required-badge">required</span>
-                        </label>
-                        <input type="text" id="device-model" placeholder="e.g., SM-S918B">
+
+                    <!-- Hardware Properties Section -->
+                    <div class="collapsible-section">
+                        <div class="section-header" onclick="toggleSection(this)">
+                            <h4>Hardware Properties</h4>
+                            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="section-content">
+                            <div class="form-group">
+                                <label for="device-hardware">Hardware<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-hardware" placeholder="e.g., qcom">
+                                <small class="helper-text">ro.hardware (e.g., qcom for Qualcomm)</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-hardware-chipname">Hardware Chipname<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-hardware-chipname" placeholder="e.g., SM8650">
+                                <small class="helper-text">ro.hardware.chipname</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-chipname">Chipname<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-chipname" placeholder="e.g., SM8650">
+                                <small class="helper-text">ro.chipname</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-arch">Architecture<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-arch" placeholder="e.g., arm64">
+                                <small class="helper-text">ro.arch</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-revision">Revision<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-revision" placeholder="e.g., 0">
+                                <small class="helper-text">ro.revision</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="device-manufacturer">
-                            Manufacturer<span class="required-badge">required</span>
-                        </label>
-                        <input type="text" id="device-manufacturer" placeholder="e.g., Samsung">
+
+                    <!-- SoC Properties Section -->
+                    <div class="collapsible-section">
+                        <div class="section-header" onclick="toggleSection(this)">
+                            <h4>SoC Properties</h4>
+                            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="section-content">
+                            <div class="form-group">
+                                <label for="device-soc-manufacturer">SoC Manufacturer<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-soc-manufacturer" placeholder="e.g., Qualcomm">
+                                <small class="helper-text">ro.soc.manufacturer</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-soc-model">SoC Model<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-soc-model" placeholder="e.g., SM8650">
+                                <small class="helper-text">ro.soc.model</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-board-platform">Board Platform<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-board-platform" placeholder="e.g., pineapple">
+                                <small class="helper-text">ro.board.platform</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-product-board">Product Board<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-product-board" placeholder="e.g., pineapple">
+                                <small class="helper-text">ro.product.board</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-mediatek-platform">MediaTek Platform<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-mediatek-platform" placeholder="e.g., MT6985">
+                                <small class="helper-text">ro.mediatek.platform (for MTK devices)</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="device-fingerprint">
-                            Fingerprint<span class="required-badge">required</span>
-                        </label>
-                        <input type="text" id="device-fingerprint" placeholder="e.g., samsung/m23xqns/samsung:14/UP1A.231005.007/G990BXXU7EWD5:user/release-keys">
+
+                    <!-- Build Properties Section -->
+                    <div class="collapsible-section">
+                        <div class="section-header" onclick="toggleSection(this)">
+                            <h4>Build Properties</h4>
+                            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="section-content">
+                            <div class="form-group">
+                                <label for="device-build-changelist">Build Changelist<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-build-changelist" placeholder="e.g., 12345678">
+                                <small class="helper-text">ro.build.changelist</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-build-flavor">Build Flavor<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-build-flavor" placeholder="e.g., e3qxxx-user">
+                                <small class="helper-text">ro.build.flavor</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-android-version">Android Version<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-android-version" placeholder="e.g., 14">
+                                <small class="helper-text">ro.build.version.release</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-sdk-int">SDK INT<span class="optional-badge">optional</span></label>
+                                <input type="number" id="device-sdk-int" placeholder="e.g., 34" min="21" max="35">
+                                <small class="helper-text">ro.build.version.sdk (21-35)</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="device-android-version">
-                            Android Version<span class="optional-badge">optional</span>
-                        </label>
-                        <input type="text" id="device-android-version" placeholder="e.g., 14">
+
+                    <!-- CPU Configuration Section -->
+                    <div class="collapsible-section">
+                        <div class="section-header" onclick="toggleSection(this)">
+                            <h4>CPU Configuration</h4>
+                            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="section-content">
+                            <div class="form-group">
+                                <label for="device-cpu-cores">CPU Cores<span class="optional-badge">optional</span></label>
+                                <input type="number" id="device-cpu-cores" placeholder="e.g., 8" min="1" max="16">
+                                <small class="helper-text">Number of CPU cores to spoof (1-16)</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="device-sdk-int">
-                            SDK Version<span class="optional-badge">optional</span>
-                        </label>
-                        <input type="text" id="device-sdk-int" placeholder="e.g., 34">
+
+                    <!-- Extended Fingerprints Section -->
+                    <div class="collapsible-section">
+                        <div class="section-header" onclick="toggleSection(this)">
+                            <h4>Extended Fingerprints (Android 12+)</h4>
+                            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="section-content">
+                            <div class="form-group">
+                                <label for="device-vendor-fingerprint">Vendor Fingerprint<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-vendor-fingerprint" placeholder="samsung/e3qxxx/e3q:14/UP1A.231005.007/S928BXXS1AXXX:user/release-keys">
+                                <small class="helper-text">ro.vendor.build.fingerprint</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-system-fingerprint">System Fingerprint<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-system-fingerprint" placeholder="samsung/e3qxxx/e3q:14/UP1A.231005.007/S928BXXS1AXXX:user/release-keys">
+                                <small class="helper-text">ro.system.build.fingerprint</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-system-ext-fingerprint">System Ext Fingerprint<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-system-ext-fingerprint" placeholder="samsung/e3qxxx/e3q:14/UP1A.231005.007/S928BXXS1AXXX:user/release-keys">
+                                <small class="helper-text">ro.system_ext.build.fingerprint</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-odm-fingerprint">ODM Fingerprint<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-odm-fingerprint" placeholder="samsung/e3qxxx/e3q:14/UP1A.231005.007/S928BXXS1AXXX:user/release-keys">
+                                <small class="helper-text">ro.odm.build.fingerprint</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-bootimage-fingerprint">Bootimage Fingerprint<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-bootimage-fingerprint" placeholder="samsung/e3qxxx/e3q:14/UP1A.231005.007/S928BXXS1AXXX:user/release-keys">
+                                <small class="helper-text">ro.bootimage.build.fingerprint</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-product-fingerprint">Product Fingerprint<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-product-fingerprint" placeholder="samsung/e3qxxx/e3q:14/UP1A.231005.007/S928BXXS1AXXX:user/release-keys">
+                                <small class="helper-text">ro.product.build.fingerprint</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vendor/ODM Properties Section -->
+                    <div class="collapsible-section">
+                        <div class="section-header" onclick="toggleSection(this)">
+                            <h4>Vendor/ODM Properties (Optional)</h4>
+                            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="section-content">
+                            <div class="form-group">
+                                <label for="device-vendor-brand">Vendor Brand<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-vendor-brand" placeholder="e.g., samsung">
+                                <small class="helper-text">ro.product.vendor.brand</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-vendor-device">Vendor Device<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-vendor-device" placeholder="e.g., e3q">
+                                <small class="helper-text">ro.product.vendor.device</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-vendor-manufacturer">Vendor Manufacturer<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-vendor-manufacturer" placeholder="e.g., samsung">
+                                <small class="helper-text">ro.product.vendor.manufacturer</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-vendor-model">Vendor Model<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-vendor-model" placeholder="e.g., SM-S928B">
+                                <small class="helper-text">ro.product.vendor.model</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-vendor-name">Vendor Name<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-vendor-name" placeholder="e.g., e3qxxx">
+                                <small class="helper-text">ro.product.vendor.name</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-odm-brand">ODM Brand<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-odm-brand" placeholder="e.g., samsung">
+                                <small class="helper-text">ro.product.odm.brand</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-odm-device">ODM Device<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-odm-device" placeholder="e.g., e3q">
+                                <small class="helper-text">ro.product.odm.device</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-odm-manufacturer">ODM Manufacturer<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-odm-manufacturer" placeholder="e.g., samsung">
+                                <small class="helper-text">ro.product.odm.manufacturer</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-odm-model">ODM Model<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-odm-model" placeholder="e.g., SM-S928B">
+                                <small class="helper-text">ro.product.odm.model</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-odm-name">ODM Name<span class="optional-badge">optional</span></label>
+                                <input type="text" id="device-odm-name" placeholder="e.g., e3qxxx">
+                                <small class="helper-text">ro.product.odm.name</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-buttons">
